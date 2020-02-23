@@ -1,0 +1,22 @@
+---
+- hosts: webservers
+  become: true
+  tasks:
+    - name: Upgrade all installed packages for Ubuntu
+      apt:
+        name: "*"
+        state: latest
+        update_cache: yes
+        force_apt_get: yes
+      when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+    - name: Upgrade all installed packages for openSUSE
+      zypper:
+        name: "*"
+        state: latest
+        disable_gpg_check: yes
+      when: ansible_distribution == "OpenSUSE Leap"
+    - name: Upgrade all installed packages for CentOS
+      yum:
+        name: "*"
+        state: latest
+      when: ansible_distribution == "CentOS"
