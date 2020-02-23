@@ -1,0 +1,10 @@
+all:
+  hosts:
+    3.20.232.155:
+  children:
+    webservers:
+      hosts:
+        3.20.232.155:
+    dbservers:
+      hosts:
+        3.20.232.155:
